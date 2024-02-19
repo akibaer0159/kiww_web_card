@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -154,10 +155,12 @@ class _MyHomePageState extends State<MyHomePage> {
       width: double.infinity,
       height: 5000,
       child: Container(
+        alignment: Alignment.topLeft,
         color: Colors.white,
         child: Column(
           children: [
             SizedBox(
+              width: double.infinity,
               height: 100,
             ),
             Text(
@@ -166,6 +169,72 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.indigo,
+              ),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    child: Text(
+                      "연락하기",
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.indigo,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse("tel://010-5653-0159"));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(40, 20, 0, 0),
+                      child: Text(
+                        "배기웅 010-5653-0159",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.indigoAccent,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse("tel://010-5653-0159"));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(40, 10, 0, 0),
+                      child: Text(
+                        "배기웅 010-5653-0159",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.indigoAccent,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse("tel://010-5653-0159"));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(40, 10, 0, 0),
+                      child: Text(
+                        "배기웅 010-5653-0159",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.indigoAccent,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
