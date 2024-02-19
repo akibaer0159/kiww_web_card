@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -33,6 +33,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double heightMargin = 0;
+  double width = 0;
+
+  @override
+  Future<void> didChangeDependencies() async {
+    super.didChangeDependencies();
+    heightMargin = MediaQuery.of(context).size.height;
+    heightMargin -= 60;
+    width = MediaQuery.of(context).size.width;
+    width -= 170;
+
+    await NaverMapSdk.instance.initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,19 +58,22 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 SizedBox(
                   width: double.infinity,
-                  height: 150,
+                  height: 170,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 100, 20, 0),
+                    padding: EdgeInsets.fromLTRB(0, 70, 20, 0),
                     child: Text(
-                      "테스트 테스트",
+                      "배기웅\n이가은",
                       textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.indigo, fontSize: 30),
+                      style: TextStyle(color: Colors.indigo, fontSize: 25),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Image(
-                    image: AssetImage("pick.jpg"),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Image.asset(
+                      "assets/main_2.png"
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -65,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
                     child: Text(
-                      "위치정보 위치정보",
+                      "2024. 03. 31 SUN AM 11:30\n벨라비타",
                       textAlign: TextAlign.left,
                       style: TextStyle(color: Colors.indigo, fontSize: 20),
                     ),
@@ -119,8 +136,14 @@ class _MyHomePageState extends State<MyHomePage> {
             SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Container(
+                      color: Colors.amber,
+                    ),
+                  ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(9, 730, 9, 0),
+                    padding: EdgeInsets.fromLTRB(9, heightMargin, 9, 0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
@@ -164,10 +187,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 100,
             ),
             Text(
-              "감사합니다 감사합니다\n고마워요",
+              "평생을 같이하고 싶은 사람을 만났습니다.\n서로 아껴주고 이해하며\n사랑 배풀며 살고싶습니다.\n저희 약속 위에 따뜻한 격려로 축복해 주셔서\n힘찬 출발의 디딤이 되어 주십시오.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 color: Colors.indigo,
               ),
             ),
@@ -179,59 +202,164 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse("tel://010-5653-0159"));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "신랑에게 연락하기",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.indigoAccent,
+                                ),
+                              ),
+                              Image.asset(
+                                width: 40,
+                                height: 40,
+                                "assets/call.png",
+                                color: Colors.indigoAccent,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse("tel://010-5653-0159"));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "신부에게 연락하기",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.indigoAccent,
+                                ),
+                              ),
+                              Image.asset(
+                                width: 40,
+                                height: 40,
+                                "assets/call.png",
+                                color: Colors.indigoAccent,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    padding: EdgeInsets.only(
+                      left: 20,
+                    ),
+                    child: Image.asset(
+                      width: width,
+                      "assets/image_1.png",
+                    ),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: 20,
+                      ),
+                      child: Image.asset(
+                        width: width + 100,
+                        "assets/image_2.png",
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: Image.asset(
+                        width: width + 100,
+                        "assets/image_3.png",
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: 20,
+                      ),
+                      child: Image.asset(
+                        width: width,
+                        "assets/image_4.png",
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: Image.asset(
+                        width: width + 50,
+                        "assets/image_5.png",
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 200,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
                     child: Text(
-                      "연락하기",
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.indigo,
-                      ),
+                      "오시는 길",
+                      style: TextStyle(fontSize: 25, color: Colors.indigoAccent,),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      launchUrl(Uri.parse("tel://010-5653-0159"));
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(40, 20, 0, 0),
-                      child: Text(
-                        "배기웅 010-5653-0159",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.indigoAccent,
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    child: NaverMap(
+                      options: const NaverMapViewOptions(
+                        initialCameraPosition: NCameraPosition(
+                            target: NLatLng(127.0394774,37.5086751),
+                            zoom: 10,
+                            bearing: 0,
+                            tilt: 0
                         ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      launchUrl(Uri.parse("tel://010-5653-0159"));
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(40, 10, 0, 0),
-                      child: Text(
-                        "배기웅 010-5653-0159",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.indigoAccent,
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      launchUrl(Uri.parse("tel://010-5653-0159"));
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(40, 10, 0, 0),
-                      child: Text(
-                        "배기웅 010-5653-0159",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.indigoAccent,
-                        ),
-                      ),
+                      ), // 지도 옵션을 설정할 수 있습니다.
+                      forceGesture: true,
+                      onMapReady: (controller) {},
+                      onMapTapped: (point, latLng) {},
+                      onSymbolTapped: (symbol) {},
+                      onCameraChange: (position, reason) {},
+                      onCameraIdle: () {},
+                      onSelectedIndoorChanged: (indoor) {},
                     ),
                   ),
                 ],
